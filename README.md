@@ -1,1 +1,29 @@
-init
+# hbfintech-logger
+## 架构图
+![image](http://10.46.178.188:8888/common/hbfintech-logger/doc/hbfintech-logger.png)
+## 类图
+![image](http://10.46.178.188:8888/common/hbfintech-logger/doc/hbfintech-logger-classDiagram.png)
+
+## 历史版本
+### 1.0.8
+    添加访问日志
+    tomcat最低要求tomcat8
+    JDK最低需求java8
+### 1.0.7
+-  移除废弃代码
+-  代码最低支持版本Java1.7   
+-  代码遵循Sonar java_hbfintech规则
+
+### 1.0.3-RELEASE
+
+    添加接口日志常量 
+    com.hbfintech.logger.constants.LoggingConstants.REQUEST_SUCCESS             请求成功
+    com.hbfintech.logger.constants.LoggingConstants.REQUEST_ERROR               请求失败(合作方系统错误)
+    com.hbfintech.logger.constants.LoggingConstants.REQUEST_TIMEOUT             请求超时(网络问题、合作方系统宕机、业务处理超时)
+    com.hbfintech.logger.constants.LoggingConstants.REQUEST_CODE_UNKONW         合作方未知异常->错误码未知
+    com.hbfintech.logger.constants.LoggingConstants.REQUEST_SYSTEM_INNER_ERROR  系统内部异常->系统内部无法处理异常
+
+### 1.0.0
+
+-  添加业务日志类型
+

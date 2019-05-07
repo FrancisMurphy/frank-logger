@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config autoScan="true">
+    <!--
+        autoScan=true
+            custom logger会在容器启动后注册一个当前logger文件的监听，如果日志配置文件修改后会自动更新配置信息，主要使用文件系统的实时通知监听
+        <whitelists>
+            <pattern type="package">com.hbfintech.logger</pattern>
+        </whitelists>
+
+        <whitelists>
+            <pattern type="url">http://www.baidu.com</pattern>
+        </whitelists>
+
+        package	对logger类的包名进行过滤
+        url		主要针对访问日志、外部接口日志的url进行过滤
+
+     -->
+    <logger type="debug" turn="true">
+        <whitelists>
+            <pattern type="package">com.hbfintech.logger</pattern>
+        </whitelists>
+    </logger>
+
+    <logger type="biz" turn="true">
+    </logger>
+
+    <logger type="warn" turn="true">
+    </logger>
+
+    <logger type="error" turn="true">
+    </logger>
+
+    <logger type="system" turn="true">
+    </logger>
+
+    <logger type="extra" turn="true">
+        <whitelists>
+            <pattern type="url">http://www.baidu.com</pattern>
+        </whitelists>
+    </logger>
+
+    <logger type="access" turn="true">
+    </logger>
+
+    <logger type="pfme" turn="true">
+    </logger>
+</config>

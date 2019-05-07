@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>risk</contextName>
+
+    <property name="CUSTOM_LOG_HOME" value="./logs/custom"/>
+    <property name="FILE_HOME" value="./logs/file"/>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level - %msg %n %caller{1}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="com.hbfintech.logger.debug"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-debug-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<debug>]]>%d{YYYY-MM:dd
+                HH:mm:ss}|[%thread]|%ec|%em|%msg<![CDATA[</debug>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="com.hbfintech.logger.warn"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-warn-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<warn>]]>%d{YYYY-MM:dd HH:mm:ss}|[%thread]|%msg
+                <![CDATA[</warn>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="com.hbfintech.logger.error"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-error-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<error>]]>%d{YYYY-MM:dd HH:mm:ss}|[%thread]|%msg
+                <![CDATA[</error>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="com.hbfintech.logger.system"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-system-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<system>]]>%d{YYYY-MM:dd HH:mm:ss}|[%thread]|%msg
+                <![CDATA[</system>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="com.hbfintech.logger.extra"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-extra-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<extra>]]>%d{YYYY-MM:dd HH:mm:ss}|[%thread]|%msg
+                <![CDATA[</extra>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="com.hbfintech.logger.access"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-access-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<access>]]>%d{YYYY-MM:dd HH:mm:ss}|[%thread]|%msg
+                <![CDATA[</access>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="com.hbfintech.logger.pfme"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${CUSTOM_LOG_HOME}/custom-00-pfme-%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[<performance>]]>%d{YYYY-MM:dd
+                HH:mm:ss}|[%thread]|%msg<![CDATA[</performance>]]>%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILEALL"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${FILE_HOME}/%d{yyyy-MM-dd_HH}.%i.log
+            </fileNamePattern>
+            <maxHistory>24</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%thread] %-5level - %msg %n %caller{1}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.apache.ibatis" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.quartz" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.hibernate" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.mybatis.spring" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.apache" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.alibaba" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.jboss" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.hbfintech.logger.debug" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.debug"/>
+    </logger>
+
+    <logger name="com.hbfintech.logger.warn" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.warn"/>
+    </logger>
+
+    <logger name="com.hbfintech.logger.error" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.error"/>
+    </logger>
+
+    <logger name="com.hbfintech.logger.access" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.access"/>
+    </logger>
+
+    <logger name="com.hbfintech.logger.system" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.system"/>
+    </logger>
+    <logger name="com.hbfintech.logger.extra" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.extra"/>
+    </logger>
+    <logger name="com.hbfintech.logger.pfme" level="DEBUG" additivity="false">
+        <appender-ref ref="com.hbfintech.logger.pfme"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hbfintech.custom.logger.autoconfig.CustomLoggerAutoConfiguration
