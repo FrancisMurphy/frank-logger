@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.hbfintech</groupId>
         <artifactId>hbfintech-logger-parent</artifactId>
-        <version>2.0.0-RELEASE</version>
+        <version>2.0.1-RELEASE</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
     <artifactId>hbfintech-logger-spring-boot-autoconfigue</artifactId>
     <packaging>jar</packaging>
 
-    <name>A Camel Route</name>
+    <name>hbfintech-logger-spring-boot-autoconfigue</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
