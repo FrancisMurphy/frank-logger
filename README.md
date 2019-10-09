@@ -5,6 +5,8 @@
 ![image](http://10.46.178.188:8888/common/hbfintech-logger/doc/hbfintech-logger-classDiagram.png)
 
 ## 历史版本
+### 2.0.2
+    修复异常日志不全的BUG
 ### 1.0.8
     添加访问日志
     tomcat最低要求tomcat8

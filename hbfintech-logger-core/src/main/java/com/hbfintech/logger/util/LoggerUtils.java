@@ -39,6 +39,8 @@ public final class LoggerUtils
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
+        pw.flush();
+        sw.flush();
         return sw.toString();
     }
 
