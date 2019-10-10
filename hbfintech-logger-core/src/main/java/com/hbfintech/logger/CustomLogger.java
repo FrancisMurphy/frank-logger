@@ -1,10 +1,6 @@
 package com.hbfintech.logger;
 
-import com.hbfintech.logger.dto.AccessLogDto;
-import com.hbfintech.logger.dto.ExtraLogDto;
-import com.hbfintech.logger.dto.PerformanceLogDto;
-import com.hbfintech.logger.dto.SystemLogDto;
-import com.hbfintech.logger.dto.WarnLogDto;
+import com.hbfintech.logger.dto.*;
 
 /**
  * 自定义Logger
@@ -43,6 +39,13 @@ public interface CustomLogger
     void warn(WarnLogDto debugLogDto);
 
     /**
+     * 异常日志，推荐使用
+     * com.hbfintech.logger.CustomLogger#error(java.lang.String, java.lang.String, java.lang.Exception)
+     * @param logDto
+     */
+    void error(ErrorLogDto logDto);
+
+    /**
      * 异常日志
      *
      * @param exceptionNo 异常编号
@@ -50,7 +53,6 @@ public interface CustomLogger
      * @param ex          异常类
      */
     void error(String exceptionNo, String message, Exception ex);
-
     /**
      * 外部接口日志
      *

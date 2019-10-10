@@ -46,25 +46,25 @@ public class DefaultCustomLogger implements CustomLogger
         logger.debug(msg, arguments);
     }
 
-    public void warn(WarnLogDto debugLogDto)
+    public void warn(WarnLogDto warnLogDto)
     {
         LoggerThreadData.setLoggerActionContext(
-                new LoggerActionContext(LoggerType.Warn, debugLogDto));
-        logger.warn("{}|{}|{}|{}|{}", debugLogDto.getWarnNo(),
-                debugLogDto.getWarnName(), debugLogDto.getWarnRemark(),
-                debugLogDto.getWarnTime(), debugLogDto.getStatus().getLabel());
+                new LoggerActionContext(LoggerType.Warn, warnLogDto));
+        logger.warn("{}|{}|{}|{}|{}", warnLogDto.getWarnNo(),
+                warnLogDto.getWarnName(), warnLogDto.getWarnRemark(),
+                warnLogDto.getWarnTime(), warnLogDto.getStatus().getLabel());
     }
 
     /**
      * @see com.hbfintech.logger.CustomLogger#error(com.hbfintech.logger.dto.ErrorLogDto)
      */
-    public void error(ErrorLogDto debugLogDto)
+    public void error(ErrorLogDto errorLogDto)
     {
         LoggerThreadData.setLoggerActionContext(
-                new LoggerActionContext(LoggerType.Error, debugLogDto));
-        logger.error("{}|{}|{}|{}", debugLogDto.getExceptionNo(),
-                debugLogDto.getMessage(), debugLogDto.getExceptionTime(),
-                debugLogDto.getStack());
+                new LoggerActionContext(LoggerType.Error, errorLogDto));
+        logger.error("{}|{}|{}|{}", errorLogDto.getExceptionNo(),
+                errorLogDto.getMessage(), errorLogDto.getExceptionTime(),
+                errorLogDto.getStack());
     }
 
     @Override public void extra(ExtraLogDto extraLog)
