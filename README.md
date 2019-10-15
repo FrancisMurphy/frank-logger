@@ -1,8 +1,8 @@
 # hbfintech-logger
 ## 架构图
-![image](http://10.46.178.188:8888/common/hbfintech-logger/doc/hbfintech-logger.png)
+![](./doc/hbfintech-logger-architecture.png)
 ## 类图
-![image](http://10.46.178.188:8888/common/hbfintech-logger/doc/hbfintech-logger-classDiagram.png)
+![](./doc/hbfintech-logger-diagram.png)
 
 ## 历史版本
 ### 2.0.2
