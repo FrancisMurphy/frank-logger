@@ -1,5 +1,6 @@
 package com.hbfintech.logger;
 
+import com.hbfintech.logger.configuration.CustomConfigBean;
 import org.slf4j.Logger;
 
 import com.hbfintech.logger.pattern.EndClassNameOfConverter;
@@ -28,16 +29,14 @@ public final class LoggerFactory
 
     public static final int SUCCESSFUL_INITIALIZATION = 3;
 
-    private static volatile int initializationState = UN_INITIALIZED;
+    public static int INIT_STATS = UN_INITIALIZED;
 
     public static final String UNSUCCESSFUL_INIT_MSG = "初始化未成功";
 
     static
     {
-        PatternLayout.defaultConverterMap
-                .put("ec", EndClassNameOfConverter.class.getName());
-        PatternLayout.defaultConverterMap
-                .put("em", EndMethodNameOfConverterextends.class.getName());
+        PatternLayout.defaultConverterMap.put("ec", EndClassNameOfConverter.class.getName());
+        PatternLayout.defaultConverterMap.put("em", EndMethodNameOfConverterextends.class.getName());
     }
 
     private LoggerFactory()
@@ -70,19 +69,19 @@ public final class LoggerFactory
 
     public static ILoggerFactory getILoggerFactory()
     {
-        if (initializationState == UN_INITIALIZED)
+        if (INIT_STATS == UN_INITIALIZED)
         {
             synchronized (LoggerFactory.class)
             {
-                if (initializationState == UN_INITIALIZED)
+                if (INIT_STATS == UN_INITIALIZED)
                 {
-                    initializationState = ON_GOING_INITIALIZATION;
+                    INIT_STATS = ON_GOING_INITIALIZATION;
                     performInitialization();
                 }
             }
         }
 
-        if (initializationState == SUCCESSFUL_INITIALIZATION)
+        if (INIT_STATS == SUCCESSFUL_INITIALIZATION)
         {
             return StaticLoggerFactoryBinder.getSingleton().getILoggerFactory();
         }
@@ -100,9 +99,23 @@ public final class LoggerFactory
         }
         catch (Exception e)
         {
-            initializationState = FAILED_INITIALIZATION;
+            INIT_STATS = FAILED_INITIALIZATION;
             logger.error(e.getMessage(), e);
         }
-        initializationState = SUCCESSFUL_INITIALIZATION;
+        INIT_STATS = SUCCESSFUL_INITIALIZATION;
+    }
+
+    public static void performInitialization(CustomConfigBean customConfigBean)
+    {
+        try
+        {
+            StaticLoggerFactoryBinder.getSingleton().init(customConfigBean);
+        }
+        catch (Exception e)
+        {
+            INIT_STATS = FAILED_INITIALIZATION;
+            logger.error(e.getMessage(), e);
+        }
+        INIT_STATS = SUCCESSFUL_INITIALIZATION;
     }
 }

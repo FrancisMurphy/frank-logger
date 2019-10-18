@@ -1,6 +1,9 @@
 package com.hbfintech.logger;
 
+import com.hbfintech.logger.configuration.CustomConfigBean;
 import com.hbfintech.logger.util.ContextInitializer;
+
+import java.util.Properties;
 
 /**
  * <静态工厂绑定>
@@ -49,6 +52,12 @@ public final class StaticLoggerFactoryBinder implements ILoggerFactoryBinder
     {
         contextInitializer = new ContextInitializer(loggerContext);
         contextInitializer.autoConfig();
+    }
+
+    public void init(CustomConfigBean configBean)
+    {
+        contextInitializer = new ContextInitializer(loggerContext);
+        contextInitializer.init(configBean);
     }
 
     public void restConfig()

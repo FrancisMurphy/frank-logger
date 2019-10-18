@@ -62,6 +62,12 @@ public class ContextInitializer
         startListener();
     }
 
+    public void init(CustomConfigBean customConfig)
+    {
+        loggerContext.setCustomConfig(customConfig);
+        loggerContext.afterInitialize();
+    }
+
     private void initConfig()
     {
         InputStream inputStream = ContextInitializer.class.getClassLoader()
