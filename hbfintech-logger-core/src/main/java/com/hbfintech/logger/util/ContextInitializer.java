@@ -57,9 +57,13 @@ public class ContextInitializer
      */
     public void autoConfig()
     {
-        initConfig();
-        loggerContext.afterInitialize();
-        startListener();
+        InputStream defaultConfigInputStream = ContextInitializer.class.getClassLoader().getResourceAsStream(defaultLoggerConfig);
+        if(defaultConfigInputStream!=null)
+        {
+            initConfig(defaultConfigInputStream);
+            loggerContext.afterInitialize();
+            startListener();
+        }
     }
 
     public void init(CustomConfigBean customConfig)
@@ -68,24 +72,21 @@ public class ContextInitializer
         loggerContext.afterInitialize();
     }
 
-    private void initConfig()
+    private void initConfig(InputStream inputStream)
     {
-        InputStream inputStream = ContextInitializer.class.getClassLoader()
-                .getResourceAsStream(defaultLoggerConfig);
-
-        if (inputStream == null)
+        if (inputStream != null)
         {
             throw new LoggerInitException(
                     "hbfintech-logger.xml not found on classpath");
         }
-
         CustomConfigBean customConfig = configParse.parse(inputStream);
         loggerContext.setCustomConfig(customConfig);
+
     }
 
     public void reloadConfig()
     {
-        initConfig();
+        autoConfig();
     }
 
     private void startListener()

@@ -70,7 +70,7 @@ public class CustomLoggerAutoconfigListener implements GenericApplicationListene
 
     private void onApplicationStartingEvent(ApplicationStartingEvent event) {
         synchronized (LoggerFactory.class) {
-            logger.isDebugEnabled()
+            if( logger.isDebugEnabled() )
             {
                 logger.debug("spring context onApplicationStartingEvent >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end ");
                 logger.debug("spring context onApplicationStartingEvent  hash:"+this.hashCode()+",source:"+event.getSource().getClass() +" init>>>>>>>>>>>>>>" + event.getClass());

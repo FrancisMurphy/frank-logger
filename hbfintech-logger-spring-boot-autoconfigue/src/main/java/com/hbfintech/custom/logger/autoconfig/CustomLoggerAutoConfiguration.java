@@ -4,7 +4,6 @@ import com.hbfintech.logger.logging.web.CustomAccessLogFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +12,7 @@ import javax.servlet.Filter;
 @Configuration
 public class CustomLoggerAutoConfiguration
 {
+
     @Bean
     @ConditionalOnClass(Filter.class)
     @ConditionalOnMissingBean
@@ -26,7 +26,7 @@ public class CustomLoggerAutoConfiguration
     }
 
     @Bean
-    @ConditionalOnClass(FeignClient.class)
+    @ConditionalOnClass(name= FeignClientExtraLoggerAspect.FEIGN_CLIENT_CLASS_NAME)
     @ConditionalOnMissingBean
     public FeignClientExtraLoggerAspect feignClientExtraLoggerAspect()
     {
