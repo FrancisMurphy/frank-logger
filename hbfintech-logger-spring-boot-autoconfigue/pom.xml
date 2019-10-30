@@ -39,11 +39,10 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>com.hbfintech</groupId>
-            <artifactId>hbfintech-logger</artifactId>
-            <version>1.0.9-RELEASE</version>
+            <artifactId>hbfintech-logger-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
