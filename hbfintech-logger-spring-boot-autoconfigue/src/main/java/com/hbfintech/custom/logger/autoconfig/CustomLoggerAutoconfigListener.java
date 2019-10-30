@@ -86,10 +86,7 @@ public class CustomLoggerAutoconfigListener implements GenericApplicationListene
         {
             logger.debug("spring context onApplicationEnvironmentPreparedEvent >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             logger.debug("spring context onApplicationEnvironmentPreparedEvent  hash:"+this.hashCode()+",source:"+event.getSource().getClass() +" init>>>>>>>>>>>>>>" + event.getClass());
-
             springPropertiesSystem = new SpringPropertiesSystem(event.getEnvironment());
-            logger.debug(event.getEnvironment().getProperty("custom.logger.debug.turn"));
-            logger.debug(event.getEnvironment().getProperty("spring.datasource.url"));
             LoggerFactory.performInitialization(springPropertiesSystem.apply());
 
         }
