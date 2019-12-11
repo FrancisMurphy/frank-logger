@@ -5,6 +5,8 @@
 ![](./doc/hbfintech-logger-diagram.png)
 
 ## 历史版本
+### 2.1.0
+    添加spring boot autoconfig
 ### 2.0.2
     修复异常日志不全的BUG
 ### 1.0.8

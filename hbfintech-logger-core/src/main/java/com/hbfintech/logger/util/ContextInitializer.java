@@ -35,7 +35,11 @@ public class ContextInitializer
      */
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected String defaultLoggerConfig = "hbfintech-logger.xml";
+    protected static final String defaultLoggerConfig = "hbfintech-logger.xml";
+
+    protected static final String BOOT_PROPERTIES = "application.properties";
+
+    protected static final String BOOT_YML = "application.yml";
 
     protected LoggerContext loggerContext;
 
@@ -57,29 +61,36 @@ public class ContextInitializer
      */
     public void autoConfig()
     {
-        initConfig();
-        loggerContext.afterInitialize();
-        startListener();
+        //判断是否存在Spring Boot配置文件
+        InputStream defaultConfigInputStream = ContextInitializer.class.getClassLoader().getResourceAsStream(defaultLoggerConfig);
+        if(defaultConfigInputStream!=null)
+        {
+            initConfig(defaultConfigInputStream);
+            loggerContext.afterInitialize();
+            startListener();
+        }
     }
 
-    private void initConfig()
+    public void init(CustomConfigBean customConfig)
     {
-        InputStream inputStream = ContextInitializer.class.getClassLoader()
-                .getResourceAsStream(defaultLoggerConfig);
+        loggerContext.setCustomConfig(customConfig);
+        loggerContext.afterInitialize();
+    }
 
+    private void initConfig(InputStream inputStream)
+    {
         if (inputStream == null)
         {
-            throw new LoggerInitException(
-                    "hbfintech-logger.xml not found on classpath");
+            throw new LoggerInitException("inputStream can not null!!!");
         }
-
         CustomConfigBean customConfig = configParse.parse(inputStream);
         loggerContext.setCustomConfig(customConfig);
+
     }
 
     public void reloadConfig()
     {
-        initConfig();
+        autoConfig();
     }
 
     private void startListener()

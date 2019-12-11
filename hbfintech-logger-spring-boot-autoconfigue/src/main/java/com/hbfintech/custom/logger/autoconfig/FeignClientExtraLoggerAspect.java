@@ -5,26 +5,21 @@ import com.alibaba.fastjson.JSONObject;
 import com.hbfintech.logger.CustomLogger;
 import com.hbfintech.logger.LoggerFactory;
 import com.hbfintech.logger.dto.ExtraLogDto;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Feign外部访问日志
@@ -32,6 +27,9 @@ import java.util.Map;
 @Aspect
 public class FeignClientExtraLoggerAspect
 {
+
+    public static final String FEIGN_CLIENT_CLASS_NAME = "org.springframework.cloud.openfeign.FeignClient";
+
     protected CustomLogger logger = LoggerFactory.getCustomLogger(getClass());
 
     private ThreadLocal<Date>  requestDates = new ThreadLocal<>();
@@ -53,9 +51,24 @@ public class FeignClientExtraLoggerAspect
     public void signAfter(JoinPoint joinPoint, Object retVal)
     {
         Object targetObject = joinPoint.getTarget();
+        Class clazz = null;
+        String baseUrl = "";
+        try {
+            clazz = Class.forName(FEIGN_CLIENT_CLASS_NAME);
+            Object feignClient = AnnotationUtils.findAnnotation(targetObject.getClass(),clazz);
+            Method method = clazz.getMethod("url");
+            Object urlObject  = ReflectionUtils.invokeMethod(method , feignClient );
 
-        FeignClient feignClient = AnnotationUtils.findAnnotation(targetObject.getClass(),FeignClient.class);
-        String baseUrl = feignClient.url();
+            if(urlObject != null )
+            {
+                baseUrl = urlObject.toString();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
 
         MethodSignature joinPointObject = (MethodSignature) joinPoint.getSignature();
 
